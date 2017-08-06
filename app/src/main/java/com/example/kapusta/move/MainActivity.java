@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
+import android.view.animation.ScaleAnimation;
 import android.widget.ImageView;
 
 import java.util.HashMap;
@@ -69,6 +70,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         int x4 = (int)(Math.random()*10);
         int y4 = (int)(Math.random()*10);
 
+        ScaleAnimation scaleAnimation;
+
         public View getmView() {
             return v;
         }
@@ -86,7 +89,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             viewY = v.getY();
         }
 
-        public void collide(float initX, float initY, float initWidth, float initHeight){
+        public boolean collide(float initX, float initY, float initWidth, float initHeight){
             for (Map.Entry<Integer, RunRunnable> entry : hashObjectMap.entrySet()){
                 float comparedX = entry.getValue().getmView().getX();
                 float comparedY = entry.getValue().getmView().getY();
@@ -102,9 +105,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                                 comparedY<=initY+initHeight&&comparedY>=initY||
                         comparedX<=initX+initWidth&&comparedX>=initX&&
                                 comparedY+height>=initY&& comparedY+height<=initY+initHeight){
-
+                    return true;
                 }
             }
+            return false;
         }
 
         @Override
@@ -113,6 +117,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 Integer key = entry.getKey();
                 if (key.equals(v.getId())) continue;
                 RunRunnable value = entry.getValue();
+            }
+            if(collide(v.getX(), v.getY(), v.getWidth(), v.getHeight())){
+                scaleAnimation = new ScaleAnimation(1,2,1,2);
+                v.setAnimation(scaleAnimation);
             }
 
             if (v.getX() >= width - v.getWidth()) {
