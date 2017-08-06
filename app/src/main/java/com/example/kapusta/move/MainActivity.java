@@ -120,6 +120,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
             if(collide(v.getX(), v.getY(), v.getWidth(), v.getHeight())){
                 scaleAnimation = new ScaleAnimation(1,2,1,2);
+                scaleAnimation.setDuration(10000);
                 v.setAnimation(scaleAnimation);
             }
 
@@ -152,7 +153,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 v.setX(viewX+=x4);
                 v.setY(viewY-=y4);
             }
-            handler.postDelayed(this, 5);
+            handler.postDelayed(this, 10);
         }
     }
 }
