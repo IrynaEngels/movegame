@@ -98,7 +98,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 if(comparedX+width>=initX&&comparedX+width<=initX+initWidth&&
                         comparedY+height>=initY&& comparedY+height<=initY+initHeight||
-
                         comparedX<=initX+initWidth&&comparedX>=initX&&
                                 comparedY<=initY+initHeight&&comparedY>=initY||
                         comparedX+width>=initX&&comparedX+width<=initX+initWidth&&
@@ -118,6 +117,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 if (key.equals(v.getId())) continue;
                 RunRunnable value = entry.getValue();
             }
+
             if(collide(v.getX(), v.getY(), v.getWidth(), v.getHeight())){
                 scaleAnimation = new ScaleAnimation(1,2,1,2);
                 scaleAnimation.setDuration(10000);
